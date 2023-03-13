@@ -1,0 +1,84 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+:root {
+  --cell: 100px;
+  --mark: calc(var(--cell) * 0.9);
+}
+
+.board {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 300px;
+  width: 300px;
+  background-color: black;
+  transform: translate(-50%, -50%);
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(3, auto);
+}
+
+.board .cell {
+  height: var(--cell);
+  width: var(--cell);
+  background-color: white;
+  border: 1px solid black;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-origin: bottom;
+}
+
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.o):hover:before,
+.board.x .cell:not(.x):not(.o):hover::after {
+  position: absolute;
+  content: "";
+  height: var(--mark);
+  width: calc(var(--mark) * 0.15);
+  background-color: black;
+  top: 50%;
+  left: 50%;
+}
+.board .cell.x::after,
+.board.x .cell:not(.x):not(.o):hover::after {
+  transform: translate(-50%, -50%) rotate(315deg);
+}
+
+.board .cell.x::before,
+.board.x .cell:not(.x):not(.o):hover::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.cell.o::before,
+.board.o .cell:not(.x):not(.o):hover::before {
+  position: absolute;
+  content: "";
+  height: var(--mark);
+  width: var(--mark);
+  background-color: black;
+  border-radius: 50%;
+}
+
+.cell.o::after,
+.board.o .cell:not(.x):not(.o):hover:after {
+  position: absolute;
+  content: "";
+  height: calc(var(--mark) * 0.7);
+  width: calc(var(--mark) * 0.7);
+  background-color: white;
+  border-radius: 50%;
+}
